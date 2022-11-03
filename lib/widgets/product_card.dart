@@ -49,8 +49,10 @@ class _PriceTag extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
-      child: Text('\$20,070.00', style: TextStyle(color: Color(0xFF595758), fontSize: 20, fontWeight: FontWeight.bold),),
-      width: 120,
+      child: FittedBox(
+        child: Text('\$50,070.00', style: TextStyle(color: Color(0xFF595758), fontSize: 20, fontWeight: FontWeight.bold),)
+      ),
+      width: 100,
       height: 40,
       decoration: BoxDecoration(
         color: Color(0xFFFFFEE100)

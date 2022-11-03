@@ -110,14 +110,14 @@ class _LoginForm extends StatelessWidget {
               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(1)),
               disabledColor: Colors.grey,
               elevation: 0,
-              color: Color(0xFFB200BB),
+              color: Color(0xFFFFFEE100),
               child: Container(
                 padding: EdgeInsets.symmetric( horizontal: 80, vertical: 15),
                 child: Text(
                   loginForm.isLoading 
                     ? 'Wait'
                     : 'Sign in',
-                  style: TextStyle( color: Colors.white ),
+                  style: TextStyle( color: Color(0xFF595758) ),
                 )
               ),
               onPressed: loginForm.isLoading ? null : () async {
