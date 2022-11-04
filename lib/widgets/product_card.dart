@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:productos_app/models/product.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({Key? key}) : super(key: key);
+
+  final Product product;
+
+  const ProductCard({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +19,12 @@ class ProductCard extends StatelessWidget {
         child: Stack(
           alignment: Alignment.bottomLeft,
           children: [
-            _BackgroundImage(),
-            _ProductDetails(),
+            _BackgroundImage( product.pic ),
+            _ProductDetails(name: product.name, description: product.description,),
             Positioned(
               top: 0,
               right: 0,
-              child: _PriceTag()
+              child: _PriceTag(price: product.price,)
             )
           ],
         ),
@@ -44,13 +48,18 @@ class ProductCard extends StatelessWidget {
 }
 
 class _PriceTag extends StatelessWidget {
+
+  final double price;
+
+  const _PriceTag({required this.price});
+
    @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
       padding: EdgeInsets.symmetric(vertical: 2, horizontal: 4),
       child: FittedBox(
-        child: Text('\$50,070.00', style: TextStyle(color: Color(0xFF595758), fontSize: 20, fontWeight: FontWeight.bold),)
+        child: Text('\$$price', style: TextStyle(color: Color(0xFF595758), fontSize: 20, fontWeight: FontWeight.bold),)
       ),
       width: 100,
       height: 40,
@@ -62,6 +71,12 @@ class _PriceTag extends StatelessWidget {
 }
 
 class _ProductDetails extends StatelessWidget {
+
+  final String name;
+  final String? description;
+
+  const _ProductDetails({ required this.name, this.description});
+
   @override
   Widget build(BuildContext context) {
     TextStyle style1 = TextStyle( fontSize: 16, color: Color(0xFF595758), fontWeight: FontWeight.bold);
@@ -76,17 +91,17 @@ class _ProductDetails extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Acer Predator Helios 700', 
+            name, 
             style: style1,
             maxLines: 1,
             overflow: TextOverflow.ellipsis,
           ),
-          Text(
-            'Bigger, stronger and with plenty of power to spare. Tackle every game with Helios at your back.', 
-            style: style2,
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
+           Text(
+             description!,
+             style: style2,
+             maxLines: 2,
+             overflow: TextOverflow.ellipsis,
+           ),
         ],
       )
     );
@@ -94,14 +109,21 @@ class _ProductDetails extends StatelessWidget {
 }
 
 class _BackgroundImage extends StatelessWidget {
+
+  final String? url;
+
+  const _BackgroundImage(this.url); 
+
   @override
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
       height: 300,
-      child: FadeInImage(
+      child: url == null
+      ? Image(image: AssetImage('assets/image.png'))
+      : FadeInImage(
         placeholder: AssetImage('assets/dual-ball.gif'),
-        image: NetworkImage('https://via.placeholder.com/400x300/'),
+        image: NetworkImage(url!),
         fit: BoxFit.cover
       ),
     );

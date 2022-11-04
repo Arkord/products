@@ -6,6 +6,7 @@ class Product {
         required this.name,
         this.pic,
         required this.price,
+        this.description
     });
 
     bool available;
@@ -13,6 +14,7 @@ class Product {
     String? pic;
     double price;
     String? id;
+    String? description;
 
     factory Product.fromJson(String str) => Product.fromMap(json.decode(str));
 
@@ -23,6 +25,7 @@ class Product {
         name: json["name"],
         pic: json["pic"],
         price: json["price"].toDouble(),
+        description: json["description"],
     );
 
     Map<String, dynamic> toMap() => {
@@ -30,5 +33,6 @@ class Product {
         "name": name,
         "pic": pic,
         "price": price,
+        "description": description
     };
 }
